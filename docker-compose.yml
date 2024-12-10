@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  ansible:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ansible
+    command: sleep infinity
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./ansible:/ansible
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING=False
+    networks:
+      - pdris_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: app
+    command: sleep infinity
+    ports:
+      - "8080:80"
+    networks:
+      - pdris_network
+
+
+networks:
+    pdris_network:
+

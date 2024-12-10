@@ -1,0 +1,29 @@
+---
+- name: Deploy app
+  hosts: app
+  become: yes
+  
+  tasks:
+  
+  - name: Update apt
+    apt:
+      update_cache: yes
+    
+  - name: Install git
+    apt:
+      name: git
+      state: present
+    
+  - name: Install java
+    apt:
+      name: openjdk-17-jdk
+      state: present
+    
+  - name: Clone app
+    command: "git clone https://github.com/ilovethebeatles/app.git"
+    
+  - name: Open app directory
+    command: "cd app"
+    
+  - name: Deploy app
+    command: "java -jar /app.jar"
