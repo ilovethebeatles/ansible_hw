@@ -1,1 +1,3 @@
-# ansible_hw
+# ansible homework
+
+Задание выполняла по старому условию
